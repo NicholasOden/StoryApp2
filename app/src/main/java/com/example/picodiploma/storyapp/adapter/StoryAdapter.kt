@@ -1,4 +1,4 @@
-package com.example.picodiploma.storyapp.Adapter
+package com.example.picodiploma.storyapp.adapter
 
 import android.app.Activity
 import android.content.Intent

@@ -21,10 +21,8 @@ import com.example.picodiploma.storyapp.api.ApiServiceHelper
 import com.example.picodiploma.storyapp.api.Response.AddNewStoryResponse
 import com.example.picodiploma.storyapp.databinding.ActivityCreateStoryBinding
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -33,7 +31,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
-
 
 class CreateStoryActivity : AppCompatActivity() {
 
@@ -101,17 +98,16 @@ class CreateStoryActivity : AppCompatActivity() {
         }
     }
 
-    private val launcherIntentCamera = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        if (it.resultCode == RESULT_OK) {
-            val myFile = File(currentPhotoPath)
-            myFile.let { file ->
-                getFile = file
-                binding.imageViewPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
+    private val launcherIntentCamera =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val myFile = File(currentPhotoPath)
+                myFile.let { file ->
+                    getFile = file
+                    binding.imageViewPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
+                }
             }
         }
-    }
 
     private fun uploadImage() {
         if (getFile != null) {
@@ -121,7 +117,7 @@ class CreateStoryActivity : AppCompatActivity() {
 
             val apiServiceHelper = ApiServiceHelper(getToken())
 
-            GlobalScope.launch(Dispatchers.Main) {
+            lifecycleScope.launch(Dispatchers.Main) {
                 try {
                     val uploadStoryRequest = apiServiceHelper.uploadStory(
                         description,
@@ -165,13 +161,8 @@ class CreateStoryActivity : AppCompatActivity() {
         }
     }
 
-
     private fun getToken(): String? {
         val sharedPreferences = getSharedPreferences("storyapp", MODE_PRIVATE)
         return sharedPreferences.getString("token", "")
     }
-
 }
-
-
-

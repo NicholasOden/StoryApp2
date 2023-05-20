@@ -8,35 +8,29 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.picodiploma.storyapp.api.ApiServiceHelper
 import com.example.picodiploma.storyapp.api.Response.UserRegistration
+import com.example.picodiploma.storyapp.databinding.ActivitySignUpBinding
 import kotlinx.coroutines.*
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var editTextName: EditText
-    private lateinit var editTextEmail: EditText
-    private lateinit var editTextPassword: EditText
-    private lateinit var btnRegister: Button
+    private lateinit var binding: ActivitySignUpBinding
 
     private lateinit var apiServiceHelper: ApiServiceHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
-
-        editTextName = findViewById(R.id.editTextNameSignUp)
-        editTextEmail = findViewById(R.id.editTextEmailLogin)
-        editTextPassword = findViewById(R.id.editTextPasswordLogin)
-        btnRegister = findViewById(R.id.btnRegister)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val sharedPreferences = getSharedPreferences("storyapp", MODE_PRIVATE)
         val token = sharedPreferences.getString("token", "")
 
         apiServiceHelper = ApiServiceHelper(token)
 
-        btnRegister.setOnClickListener {
-            val name = editTextName.text.toString()
-            val email = editTextEmail.text.toString()
-            val password = editTextPassword.text.toString()
+        binding.btnRegister.setOnClickListener {
+            val name = binding.editTextNameSignUp.text.toString()
+            val email = binding.editTextEmailLogin.text.toString()
+            val password = binding.editTextPasswordLogin.text.toString()
 
             val userRegistration = UserRegistration(name, email, password)
 

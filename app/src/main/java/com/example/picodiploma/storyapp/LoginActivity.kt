@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import com.example.picodiploma.storyapp.api.ApiServiceHelper
+import com.example.picodiploma.storyapp.databinding.ActivityLoginBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -14,10 +15,7 @@ import kotlinx.coroutines.withContext
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var btnRegister: Button
-    private lateinit var editTextEmail: EditText
-    private lateinit var editTextPassword: EditText
-    private lateinit var btnLogin: Button
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,21 +30,17 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        btnRegister = findViewById(R.id.btnRegister)
-        editTextEmail = findViewById(R.id.editTextEmailLogin)
-        editTextPassword = findViewById(R.id.editTextPasswordLogin)
-        btnLogin = findViewById(R.id.btnLogin)
-
-        btnRegister.setOnClickListener {
+        binding.btnRegister.setOnClickListener {
             val intent = Intent(this, SignUpActivity::class.java)
             startActivity(intent)
         }
 
-        btnLogin.setOnClickListener {
-            val email = editTextEmail.text.toString()
-            val password = editTextPassword.text.toString()
+        binding.btnLogin.setOnClickListener {
+            val email = binding.editTextEmailLogin.text.toString()
+            val password = binding.editTextPasswordLogin.text.toString()
 
             login(email, password)
         }
@@ -87,5 +81,3 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
-
-

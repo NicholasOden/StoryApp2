@@ -23,10 +23,10 @@
             <ImageView
                 android:id="@+id/imageViewDetail"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
                 android:scaleType="fitXY"
-                app:srcCompat="@drawable/logo"
-                android:transitionName="profil"/>
+                android:transitionName="profil"
+                app:srcCompat="@drawable/logo" />
 
             <TextView
                 android:id="@+id/textViewDetailDescription"

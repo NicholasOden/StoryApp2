@@ -6,12 +6,11 @@ import android.transition.TransitionInflater
 import android.util.Log
 import android.view.MenuItem
 import android.view.Window
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.picodiploma.storyapp.api.ApiServiceHelper
 import com.example.picodiploma.storyapp.api.Response.StoryDetailResponse
+import com.example.picodiploma.storyapp.databinding.ActivityDetailBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -21,20 +20,21 @@ import java.util.*
 
 class DetailActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityDetailBinding
     private lateinit var apiServiceHelper: ApiServiceHelper
     private var storyId: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         // Enable content transitions
         window.requestFeature(Window.FEATURE_CONTENT_TRANSITIONS)
-        window.sharedElementEnterTransition = TransitionInflater.from(this)
-            .inflateTransition(R.transition.shared_element_transition)
-        window.sharedElementExitTransition = TransitionInflater.from(this)
-            .inflateTransition(R.transition.shared_element_transition)
+        window.sharedElementEnterTransition =
+            TransitionInflater.from(this).inflateTransition(R.transition.shared_element_transition)
+        window.sharedElementExitTransition =
+            TransitionInflater.from(this).inflateTransition(R.transition.shared_element_transition)
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail)
+        binding = ActivityDetailBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -67,14 +67,15 @@ class DetailActivity : AppCompatActivity() {
         Log.d("StoryDetail", "Description: ${storyDetail?.description}")
         Log.d("StoryDetail", "Created: ${storyDetail?.createdAt}")
 
-        findViewById<TextView>(R.id.textViewDetailName).text = storyDetail?.name ?: ""
-        findViewById<TextView>(R.id.textViewDetailDescription).text = storyDetail?.description ?: ""
-        findViewById<TextView>(R.id.textViewDetailCreated).text = storyDetail?.getCreatedDate()?.let { formatDate(it) } ?: ""
+        binding.textViewDetailName.text = storyDetail?.name ?: ""
+        binding.textViewDetailDescription.text = storyDetail?.description ?: ""
+        binding.textViewDetailCreated.text =
+            storyDetail?.getCreatedDate()?.let { formatDate(it) } ?: ""
         Glide.with(this)
             .load(storyDetail?.imageUrl)
             .placeholder(R.drawable.logo)
             .error(R.drawable.logo)
-            .into(findViewById<ImageView>(R.id.imageViewDetail))
+            .into(binding.imageViewDetail)
     }
 
     private fun formatDate(date: Date?): String? {
