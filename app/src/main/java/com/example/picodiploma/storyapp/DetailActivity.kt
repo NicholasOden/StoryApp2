@@ -9,7 +9,7 @@ import android.view.Window
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.picodiploma.storyapp.api.ApiServiceHelper
-import com.example.picodiploma.storyapp.api.Response.StoryDetailResponse
+import com.example.picodiploma.storyapp.api.response.StoryDetailResponse
 import com.example.picodiploma.storyapp.databinding.ActivityDetailBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

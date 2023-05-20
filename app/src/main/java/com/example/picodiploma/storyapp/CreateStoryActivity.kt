@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -18,18 +17,12 @@ import androidx.lifecycle.lifecycleScope
 import com.dicoding.picodiploma.storyapp.createCustomTempFile
 import com.dicoding.picodiploma.storyapp.reduceFileImage
 import com.example.picodiploma.storyapp.api.ApiServiceHelper
-import com.example.picodiploma.storyapp.api.Response.AddNewStoryResponse
 import com.example.picodiploma.storyapp.databinding.ActivityCreateStoryBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.io.File
 
 class CreateStoryActivity : AppCompatActivity() {

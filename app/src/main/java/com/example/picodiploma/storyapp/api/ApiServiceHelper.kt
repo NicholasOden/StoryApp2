@@ -1,6 +1,6 @@
 package com.example.picodiploma.storyapp.api
 
-import com.example.picodiploma.storyapp.api.Response.*
+import com.example.picodiploma.storyapp.api.response.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody

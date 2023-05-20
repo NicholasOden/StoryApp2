@@ -1,4 +1,4 @@
-package com.example.picodiploma.storyapp.api.Response
+package com.example.picodiploma.storyapp.api.response
 
 
 
