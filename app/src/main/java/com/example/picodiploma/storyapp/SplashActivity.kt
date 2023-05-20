@@ -11,6 +11,10 @@ import com.example.picodiploma.storyapp.databinding.ActivitySplashBinding
 class SplashActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySplashBinding
 
+    companion object {
+        private const val SPLASH_DELAY = 3000L // Delay time in milliseconds
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater)
@@ -24,6 +28,6 @@ class SplashActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed({
             startActivity(Intent(this@SplashActivity, LoginActivity::class.java))
             finish()
-        }, 3000)
+        }, SPLASH_DELAY)
     }
 }

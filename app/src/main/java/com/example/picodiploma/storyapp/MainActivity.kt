@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
         layoutManager = LinearLayoutManager(this)
         binding.rVMain.layoutManager = layoutManager
-        adapter = StoryAdapter(listOf())
+        adapter = StoryAdapter()
         binding.rVMain.adapter = adapter
 
         val sharedPreferences = getSharedPreferences("storyapp", MODE_PRIVATE)
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 val storyList = apiServiceHelper.getStoryList()
                 Log.d("MainActivity", "Story list: $storyList")
                 withContext(Dispatchers.Main) {
-                    adapter.setData(storyList)
+                    adapter.submitList(storyList)
                 }
             } catch (e: Exception) {
                 Log.e("MainActivity", "Error fetching stories: ${e.message}")

@@ -1,4 +1,4 @@
-package com.example.picodiploma.storyapp.customview
+package com.example.picodiploma.storyapp
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,12 +6,10 @@ import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
-import com.example.picodiploma.storyapp.R
 
 class MyEditText : AppCompatEditText, View.OnTouchListener {
 
@@ -59,7 +57,7 @@ class MyEditText : AppCompatEditText, View.OnTouchListener {
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
                 if (s.toString().isNotEmpty()) showClearButton() else hideClearButton()
                 if (s.toString().length < 8) {
-                    errorMessage = "Password must be at least 8 characters"
+                    errorMessage = context.getString(R.string.errormessage)
                     setErrorIconVisible(true)
                 } else {
                     errorMessage = ""
