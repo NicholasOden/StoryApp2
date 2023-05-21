@@ -53,4 +53,11 @@ class ApiServiceHelper(private val token: String?) {
 
         return apiService.uploadStory(authorization, description, imageMultipart, lat, lon)
     }
+
+
+    suspend fun getStoryListWithLocation(): List<Story> {
+        val location = 1 // Set the desired location value
+        return getStoryList(location = location)
+    }
+
 }

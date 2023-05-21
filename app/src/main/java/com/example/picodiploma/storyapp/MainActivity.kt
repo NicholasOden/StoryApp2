@@ -78,6 +78,14 @@ class MainActivity : AppCompatActivity() {
                 logout()
                 true
             }
+
+            R.id.menu_map -> {
+                // Create an intent to start the SettingsActivity.
+                val intent = Intent(this, MapsActivity::class.java)
+                // Start the activity.
+                startActivity(intent)
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
