@@ -7,4 +7,9 @@
     <item
         android:id="@+id/menu_logout"
         android:title="Log Out" />
+
+    <item
+        android:id="@+id/menu_paging_list"
+        android:title="Paging List"
+        app:showAsAction="never" />
 </menu>

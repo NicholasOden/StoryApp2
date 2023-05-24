@@ -1,5 +1,6 @@
 package com.example.picodiploma.storyapp
 
+import com.example.picodiploma.storyapp.paginglist.PagingListActivity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -85,6 +86,14 @@ class MainActivity : AppCompatActivity() {
                 // Start the activity.
                 startActivity(intent)
                 return true
+            }
+
+            R.id.menu_paging_list -> {
+                // Create an intent to start the paginglist.
+                val intent = Intent(this, PagingListActivity::class.java)
+                // Start the activity.
+                startActivity(intent)
+                true
             }
             else -> super.onOptionsItemSelected(item)
         }

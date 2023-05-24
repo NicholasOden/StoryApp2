@@ -63,6 +63,7 @@ dependencies {
     annotationProcessor "com.github.bumptech.glide:compiler:4.12.0"
 
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.1"
 
     //CameraX
@@ -74,5 +75,8 @@ dependencies {
     //Gmaps
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
+
+    //Paging3
+    implementation "androidx.paging:paging-runtime-ktx:3.1.0"
 
 }
