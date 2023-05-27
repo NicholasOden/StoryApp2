@@ -15,7 +15,6 @@ class PagingListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPagingListBinding
     private lateinit var viewModel: PagingListViewModel
     private lateinit var adapter: PagingCardAdapter
-
     private lateinit var apiServiceHelper: ApiServiceHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +24,9 @@ class PagingListActivity : AppCompatActivity() {
 
         apiServiceHelper = ApiServiceHelper(getToken())
 
-        viewModel = ViewModelProvider(this).get(PagingListViewModel::class.java)
+        val repository = PagingListRepository(apiServiceHelper)
+        viewModel = ViewModelProvider(this, ViewModelFactory(repository)).get(PagingListViewModel::class.java)
+
         adapter = PagingCardAdapter()
 
         binding.recyclerViewList.layoutManager = LinearLayoutManager(this)
@@ -37,7 +38,6 @@ class PagingListActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun getToken(): String? {
         val sharedPreferences = getSharedPreferences("storyapp", MODE_PRIVATE)

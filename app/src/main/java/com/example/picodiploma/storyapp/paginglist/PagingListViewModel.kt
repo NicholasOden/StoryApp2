@@ -1,6 +1,7 @@
 package com.example.picodiploma.storyapp.paginglist
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
@@ -9,19 +10,22 @@ import kotlinx.coroutines.flow.Flow
 
 class PagingListViewModel(private val repository: PagingListRepository) : ViewModel() {
 
-    private var currentStoryFlow: Flow<PagingData<Story>>? = null
-
     fun getStories(): Flow<PagingData<Story>> {
-        val lastResult = currentStoryFlow
-        if (lastResult != null) {
-            return lastResult
-        }
-        val newResult = repository.getStories()
+        return repository.getStories()
             .cachedIn(viewModelScope)
-        currentStoryFlow = newResult
-        return newResult
     }
 }
+
+class ViewModelFactory(private val repository: PagingListRepository) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(PagingListViewModel::class.java)) {
+            return PagingListViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}
+
+
 
 
 
