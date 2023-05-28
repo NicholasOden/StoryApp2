@@ -19,6 +19,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.picodiploma.storyapp.createCustomTempFile
 import com.dicoding.picodiploma.storyapp.reduceFileImage
+import com.dicoding.picodiploma.storyapp.uriToFile
 import com.example.picodiploma.storyapp.data.ApiServiceHelper
 import com.example.picodiploma.storyapp.databinding.ActivityCreateStoryBinding
 import kotlinx.coroutines.Dispatchers
@@ -41,7 +42,8 @@ class CreateStoryActivity : AppCompatActivity() {
         private val REQUIRED_PERMISSIONS = arrayOf(
             Manifest.permission.CAMERA,
             Manifest.permission.ACCESS_FINE_LOCATION,
-            Manifest.permission.ACCESS_COARSE_LOCATION
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.READ_EXTERNAL_STORAGE
         )
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
@@ -64,7 +66,9 @@ class CreateStoryActivity : AppCompatActivity() {
 
         binding.imageViewPreview.setOnClickListener { startTakePhoto() }
         binding.btnPost.setOnClickListener { uploadImage() }
-
+        binding.btnSelectFromGallery.setOnClickListener {
+            startSelectFromGallery()
+        }
         binding.switch1.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 if (ContextCompat.checkSelfPermission(
@@ -117,6 +121,24 @@ class CreateStoryActivity : AppCompatActivity() {
             if (result.resultCode == RESULT_OK) {
                 val myFile = File(currentPhotoPath)
                 myFile.let { file ->
+                    getFile = file
+                    binding.imageViewPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
+                }
+            }
+        }
+
+    private fun startSelectFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        intent.type = "image/*"
+        launcherIntentGallery.launch(intent)
+    }
+
+    private val launcherIntentGallery =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val selectedImage: Uri? = result.data?.data
+                if (selectedImage != null) {
+                    val file = uriToFile(selectedImage, this)
                     getFile = file
                     binding.imageViewPreview.setImageBitmap(BitmapFactory.decodeFile(file.path))
                 }
