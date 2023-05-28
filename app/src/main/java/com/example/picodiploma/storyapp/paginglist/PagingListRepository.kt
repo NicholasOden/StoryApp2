@@ -7,9 +7,9 @@ import com.example.picodiploma.storyapp.api.ApiServiceHelper
 import com.example.picodiploma.storyapp.api.response.Story
 import kotlinx.coroutines.flow.Flow
 
-class PagingListRepository(private val apiServiceHelper: ApiServiceHelper) {
+open class PagingListRepository(private val apiServiceHelper: ApiServiceHelper) {
 
-    fun getStories(): Flow<PagingData<Story>> {
+    open fun getStories(): Flow<PagingData<Story>> {
         return Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
