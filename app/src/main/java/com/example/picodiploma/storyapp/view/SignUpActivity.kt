@@ -1,11 +1,11 @@
-package com.example.picodiploma.storyapp
+package com.example.picodiploma.storyapp.view
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.picodiploma.storyapp.api.ApiServiceHelper
-import com.example.picodiploma.storyapp.api.response.UserRegistration
+import com.example.picodiploma.storyapp.data.ApiServiceHelper
+import com.example.picodiploma.storyapp.data.response.UserRegistration
 import com.example.picodiploma.storyapp.databinding.ActivitySignUpBinding
 import kotlinx.coroutines.*
 

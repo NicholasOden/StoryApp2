@@ -1,11 +1,13 @@
-package com.example.picodiploma.storyapp.paginglist
+package com.example.picodiploma.storyapp.view.paginglist
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.picodiploma.storyapp.api.ApiServiceHelper
+import com.example.picodiploma.storyapp.adapter.PagingCardAdapter
+import com.example.picodiploma.storyapp.data.ApiServiceHelper
+import com.example.picodiploma.storyapp.data.PagingListRepository
 import com.example.picodiploma.storyapp.databinding.ActivityPagingListBinding
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

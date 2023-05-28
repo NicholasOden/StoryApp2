@@ -1,4 +1,4 @@
-package com.example.picodiploma.storyapp
+package com.example.picodiploma.storyapp.view
 
 import android.content.Context
 import android.graphics.Canvas
@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
+import com.example.picodiploma.storyapp.R
 
 class MyEditText : AppCompatEditText, View.OnTouchListener {
 
@@ -116,12 +117,16 @@ class MyEditText : AppCompatEditText, View.OnTouchListener {
             if (isClearButtonClicked) {
                 when (event.action) {
                     MotionEvent.ACTION_DOWN -> {
-                        clearButtonImage = ContextCompat.getDrawable(context, R.drawable.ic_close_black_24dp) as Drawable
+                        clearButtonImage = ContextCompat.getDrawable(context,
+                            R.drawable.ic_close_black_24dp
+                        ) as Drawable
                         showClearButton()
                         return true
                     }
                     MotionEvent.ACTION_UP -> {
-                        clearButtonImage = ContextCompat.getDrawable(context, R.drawable.ic_close_black_24dp) as Drawable
+                        clearButtonImage = ContextCompat.getDrawable(context,
+                            R.drawable.ic_close_black_24dp
+                        ) as Drawable
                         when {
                             text != null -> text?.clear()
                         }

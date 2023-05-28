@@ -1,16 +1,17 @@
-package com.example.picodiploma.storyapp
+package com.example.picodiploma.storyapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.picodiploma.storyapp.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.picodiploma.storyapp.api.ApiServiceHelper
-import com.example.picodiploma.storyapp.api.response.Story
+import com.example.picodiploma.storyapp.data.ApiServiceHelper
+import com.example.picodiploma.storyapp.data.response.Story
 import com.example.picodiploma.storyapp.databinding.ActivityMapsBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

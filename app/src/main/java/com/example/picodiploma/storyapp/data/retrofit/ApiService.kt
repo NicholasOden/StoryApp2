@@ -1,9 +1,9 @@
-package com.example.picodiploma.storyapp.api
+package com.example.picodiploma.storyapp.data.retrofit
 
 
 
 
-import com.example.picodiploma.storyapp.api.response.*
+import com.example.picodiploma.storyapp.data.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response

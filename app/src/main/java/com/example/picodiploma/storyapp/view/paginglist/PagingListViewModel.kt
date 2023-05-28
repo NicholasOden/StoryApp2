@@ -1,11 +1,12 @@
-package com.example.picodiploma.storyapp.paginglist
+package com.example.picodiploma.storyapp.view.paginglist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.picodiploma.storyapp.api.response.Story
+import com.example.picodiploma.storyapp.data.PagingListRepository
+import com.example.picodiploma.storyapp.data.response.Story
 import kotlinx.coroutines.flow.Flow
 
 class PagingListViewModel(private val repository: PagingListRepository) : ViewModel() {

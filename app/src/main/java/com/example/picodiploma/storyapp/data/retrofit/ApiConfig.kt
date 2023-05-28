@@ -1,4 +1,4 @@
-package com.example.picodiploma.storyapp.api
+package com.example.picodiploma.storyapp.data.retrofit
 
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient

@@ -1,12 +1,10 @@
-package com.example.picodiploma.storyapp
+package com.example.picodiploma.storyapp.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
-import com.example.picodiploma.storyapp.api.ApiServiceHelper
+import com.example.picodiploma.storyapp.data.ApiServiceHelper
 import com.example.picodiploma.storyapp.databinding.ActivityLoginBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

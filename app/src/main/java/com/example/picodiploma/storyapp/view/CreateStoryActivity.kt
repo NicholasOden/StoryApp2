@@ -1,9 +1,12 @@
-package com.example.picodiploma.storyapp
+package com.example.picodiploma.storyapp.view
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.location.Location
+import android.location.LocationListener
+import android.location.LocationManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -16,7 +19,7 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.picodiploma.storyapp.createCustomTempFile
 import com.dicoding.picodiploma.storyapp.reduceFileImage
-import com.example.picodiploma.storyapp.api.ApiServiceHelper
+import com.example.picodiploma.storyapp.data.ApiServiceHelper
 import com.example.picodiploma.storyapp.databinding.ActivityCreateStoryBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,9 +33,16 @@ class CreateStoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateStoryBinding
     private lateinit var currentPhotoPath: String
     private var getFile: File? = null
+    private lateinit var locationManager: LocationManager
+    private var currentLocation: Location? = null
+    private lateinit var apiServiceHelper: ApiServiceHelper
 
     companion object {
-        private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        private val REQUIRED_PERMISSIONS = arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
         private const val REQUEST_CODE_PERMISSIONS = 10
     }
 
@@ -49,24 +59,35 @@ class CreateStoryActivity : AppCompatActivity() {
             )
         }
 
+        apiServiceHelper = ApiServiceHelper(getToken())
+        locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+
         binding.imageViewPreview.setOnClickListener { startTakePhoto() }
         binding.btnPost.setOnClickListener { uploadImage() }
-    }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_CODE_PERMISSIONS) {
-            if (!allPermissionsGranted()) {
-                Toast.makeText(
-                    this,
-                    "Tidak mendapatkan permission.",
-                    Toast.LENGTH_SHORT
-                ).show()
-                finish()
+        binding.switch1.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                if (ContextCompat.checkSelfPermission(
+                        this,
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    locationManager.requestLocationUpdates(
+                        LocationManager.GPS_PROVIDER,
+                        0,
+                        0f,
+                        locationListener
+                    )
+                } else {
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                        REQUEST_CODE_PERMISSIONS
+                    )
+                }
+            } else {
+                locationManager.removeUpdates(locationListener)
+                currentLocation = null
             }
         }
     }
@@ -102,21 +123,29 @@ class CreateStoryActivity : AppCompatActivity() {
             }
         }
 
+    private val locationListener = object : LocationListener {
+        override fun onLocationChanged(location: Location) {
+            currentLocation = location
+        }
+        override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+    }
+
     private fun uploadImage() {
         if (getFile != null) {
             val file = reduceFileImage(getFile as File)
-            val description = binding.editTextPostStory.text.toString()
-                .toRequestBody("text/plain".toMediaTypeOrNull())
+            val description =
+                binding.editTextPostStory.text.toString().toRequestBody("text/plain".toMediaTypeOrNull())
 
-            val apiServiceHelper = ApiServiceHelper(getToken())
+            val lat = currentLocation?.latitude?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
+            val lon = currentLocation?.longitude?.toString()?.toRequestBody("text/plain".toMediaTypeOrNull())
 
             lifecycleScope.launch(Dispatchers.Main) {
                 try {
                     val uploadStoryRequest = apiServiceHelper.uploadStory(
                         description,
                         file,
-                        null,
-                        null
+                        lat,
+                        lon
                     )
                     val response = withContext(Dispatchers.IO) {
                         uploadStoryRequest

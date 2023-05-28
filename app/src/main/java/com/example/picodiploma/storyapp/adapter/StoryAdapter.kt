@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.picodiploma.storyapp.DetailActivity
-import com.example.picodiploma.storyapp.api.response.Story
+import com.example.picodiploma.storyapp.view.DetailActivity
+import com.example.picodiploma.storyapp.data.response.Story
 import com.example.picodiploma.storyapp.R
 
 class StoryAdapter : ListAdapter<Story, StoryAdapter.ViewHolder>(StoryDiffCallback()) {

@@ -1,10 +1,9 @@
-package com.example.picodiploma.storyapp.paginglist
+package com.example.picodiploma.storyapp.data
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.example.picodiploma.storyapp.api.ApiServiceHelper
-import com.example.picodiploma.storyapp.api.response.Story
+import com.example.picodiploma.storyapp.data.response.Story
 import kotlinx.coroutines.flow.Flow
 
 open class PagingListRepository(private val apiServiceHelper: ApiServiceHelper) {

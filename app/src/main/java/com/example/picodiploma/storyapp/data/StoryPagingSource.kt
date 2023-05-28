@@ -1,9 +1,8 @@
-package com.example.picodiploma.storyapp.paginglist
+package com.example.picodiploma.storyapp.data
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.picodiploma.storyapp.api.ApiServiceHelper
-import com.example.picodiploma.storyapp.api.response.Story
+import com.example.picodiploma.storyapp.data.response.Story
 
 class StoryPagingSource(private val apiServiceHelper: ApiServiceHelper) : PagingSource<Int, Story>() {
 

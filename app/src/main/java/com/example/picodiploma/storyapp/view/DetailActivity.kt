@@ -1,4 +1,4 @@
-package com.example.picodiploma.storyapp
+package com.example.picodiploma.storyapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,8 +8,9 @@ import android.view.MenuItem
 import android.view.Window
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.example.picodiploma.storyapp.api.ApiServiceHelper
-import com.example.picodiploma.storyapp.api.response.StoryDetailResponse
+import com.example.picodiploma.storyapp.R
+import com.example.picodiploma.storyapp.data.ApiServiceHelper
+import com.example.picodiploma.storyapp.data.response.StoryDetailResponse
 import com.example.picodiploma.storyapp.databinding.ActivityDetailBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

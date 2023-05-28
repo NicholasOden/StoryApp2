@@ -2,7 +2,7 @@ package com.example.picodiploma.storyapp.paginglist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
-import com.example.picodiploma.storyapp.api.response.Story
+import com.example.picodiploma.storyapp.data.response.Story
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Rule
 import org.junit.Test
@@ -10,6 +10,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.paging.*
 import androidx.recyclerview.widget.ListUpdateCallback
+import com.example.picodiploma.storyapp.adapter.PagingCardAdapter
+import com.example.picodiploma.storyapp.data.PagingListRepository
+import com.example.picodiploma.storyapp.view.paginglist.PagingListViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
@@ -20,7 +23,6 @@ import kotlinx.coroutines.flow.first
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
-import kotlinx.coroutines.flow.first
 
 import org.junit.Assert.*
 

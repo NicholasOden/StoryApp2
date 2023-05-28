@@ -1,4 +1,4 @@
-package com.example.picodiploma.storyapp.paginglist
+package com.example.picodiploma.storyapp.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.picodiploma.storyapp.R
-import com.example.picodiploma.storyapp.api.response.Story
+import com.example.picodiploma.storyapp.data.response.Story
 
 
-class PagingCardAdapter : PagingDataAdapter<Story, PagingCardAdapter.PagingCardViewHolder>(DIFF_CALLBACK) {
+class PagingCardAdapter : PagingDataAdapter<Story, PagingCardAdapter.PagingCardViewHolder>(
+    DIFF_CALLBACK
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagingCardViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_paging_card, parent, false)

@@ -1,6 +1,6 @@
-package com.example.picodiploma.storyapp
+package com.example.picodiploma.storyapp.view
 
-import com.example.picodiploma.storyapp.paginglist.PagingListActivity
+import com.example.picodiploma.storyapp.view.paginglist.PagingListActivity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -10,8 +10,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.picodiploma.storyapp.R
 import com.example.picodiploma.storyapp.adapter.StoryAdapter
-import com.example.picodiploma.storyapp.api.ApiServiceHelper
+import com.example.picodiploma.storyapp.data.ApiServiceHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

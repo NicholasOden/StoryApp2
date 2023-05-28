@@ -1,6 +1,8 @@
-package com.example.picodiploma.storyapp.api
+package com.example.picodiploma.storyapp.data
 
-import com.example.picodiploma.storyapp.api.response.*
+import com.example.picodiploma.storyapp.data.response.*
+import com.example.picodiploma.storyapp.data.retrofit.ApiConfig
+import com.example.picodiploma.storyapp.data.retrofit.ApiService
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
